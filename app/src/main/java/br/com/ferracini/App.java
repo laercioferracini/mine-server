@@ -4,8 +4,12 @@
 package br.com.ferracini;
 
 import java.io.IOException;
+import java.util.Arrays;
+import java.util.Scanner;
 
 public class App {
+
+
     public String getGreeting() {
         return "Hello World!";
     }
@@ -13,6 +17,28 @@ public class App {
     public static void main(String[] args) throws IOException, InterruptedException {
         System.out.println(new App().getGreeting());
         Commands commands = new Commands();
-        commands.runCommandProcessBuilder();
+        System.out.println(System.getProperty("user.dir"));
+        Scanner sc = new Scanner(System.in);
+        try {
+
+            while (true) {
+
+                String next = sc.nextLine();
+                System.out.println(next);
+
+                commands.runCommandProcessBuilder(Arrays.asList(next));
+
+                if (next.contains("exit")) {
+                    System.out.println("closing...");
+                    sc.close();
+                    break;
+                }
+
+            }
+        } finally {
+            sc.close();
+        }
+        System.exit(0);
+
     }
 }
