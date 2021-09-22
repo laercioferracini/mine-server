@@ -35,3 +35,13 @@ tasks.named('test') {
     // Use JUnit Platform for unit tests.
     useJUnitPlatform()
 }
+jar {
+    archiveBaseName = 'app'
+    archiveVersion =  '0.1.0'
+    manifest {
+    attributes(
+      //'Class-Path': configurations.compile.collect { it.getName() }.join(' '),
+      'Main-Class': 'br.com.ferracini.App'
+    )
+  }
+}
