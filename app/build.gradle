@@ -45,3 +45,23 @@ jar {
     )
   }
 }
+
+task deploy(type: Copy) {
+    dependsOn(build, jar)
+    println('Executando deploy')
+
+    from "$buildDir/libs"
+    include "*.jar"
+    def homeDir = System.getProperty("user.home");
+    println "OS: "+System.getProperty("os.name").toUpperCase()
+
+    if (System.getProperty("os.name").toUpperCase().contains("WINDOWS")) {
+        println('Copiando arquivos')
+        //into "F:\\apache-tomcat-9.0.35\\webapps\\"
+    } else {
+
+        println('Copiando arquivos')
+        into "$homeDir/mine_server"
+    }
+
+}
